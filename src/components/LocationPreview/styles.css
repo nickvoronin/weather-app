@@ -1,0 +1,12 @@
+.location {
+	text-align: left;
+	margin: auto;
+}
+
+/*.location__name {
+	float: left;
+}*/
+
+.location__temp {
+	 float: right;
+}
