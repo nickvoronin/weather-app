@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/App/App';
-// import Home from './components/Home/Home';
+// import App from './components/App/App';
+import App from './containers/AppContainer';
 import AddLocation from './containers/AddLocationContainer';
 import ListLocations from './containers/ListLocationsContainer';
 import LocationDetails from './containers/LocationDetailsContainer';

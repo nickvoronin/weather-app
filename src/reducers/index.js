@@ -1,8 +1,8 @@
 import { combineReducers} from 'redux';
-// import locationList from './locationList.js';
-import location from './location.js';
+import location from './location';
+import currentLanguage from './languageReducer';
 
 export default combineReducers({
-	// locationList,
 	location,
+	currentLanguage,
 });

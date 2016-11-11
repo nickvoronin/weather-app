@@ -1,10 +1,23 @@
-import React, { Component } from 'react';
-// import { Link } from 'react-router';
-// import { Navbar } from 'react-bootstrap';
+import React, { Component, PropTypes } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+	static propTypes = {
+		children: PropTypes.object.isRequired,
+	};
+
+	static childContextTypes = {
+		currentLanguage: PropTypes.string.isRequired
+	};
+
+	getChildContext() {
+		return {
+			currentLanguage: this.props.currentLanguage
+		};
+	}
+
   render() {
     return (
       <div className="App">
@@ -12,14 +25,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Meteo App</h2>
         </div>
-			{/*	<Navbar className='container'>
-	        <ul className='nav nav-pills'>
-	          <li><Link onlyActiveOnIndex={true} to='/'>details</Link></li>
-	          <li><Link to='/cities'>cities</Link></li>
-	          <li><Link to='/add'>add</Link></li>
-	        </ul>
-	      </Navbar>
-*/}
+				<select value={this.props.currentLanguage}
+					onChange={(e) => {
+						this.props.changeLanguage(e.target.value)
+					}}>
+				  <option value="ru">ru</option>
+				  <option value="en">en</option>
+				</select>
         {this.props.children}
       </div>
     );

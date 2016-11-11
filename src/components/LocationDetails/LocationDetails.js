@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import translate from '../../helpers/translate.js';
 import { Link } from 'react-router';
 import GoogleMap from '../LocationOnMap/GoogleMap'
 
 
 class LocationDetails extends React.Component {
+
+	static propTypes = {
+		strings: PropTypes.object.isRequired,
+	}
+
+	static defaultProps = {
+		strings: {
+			fetchingText: 'Fetching weather...',
+			text1: `В`,
+			text2: `сейчас`,
+			text3: `градусов`,
+		},
+	}
 
 	componentDidMount() {
 		const { locationId } = this.props;
@@ -11,20 +25,24 @@ class LocationDetails extends React.Component {
 	}
 
 	renderFetching() {
+		const { backToList } = this.props.strings;
 		return (
 			<div>
-				<p>Fetching...</p>
-				<Link to={'/cities'}>Back to list</Link>
+				<Link to={'/cities'}>{backToList}</Link>
 			</div>
 		)
 	}
 
 	renderWeather(data) {
 		const { name, main } = data;
+		const {temp } = main;
+		const { backToList, reportPart1, reportPart2, reportPart3 } = this.props.strings;
 		return (
 			<div>
-				<p>В {name} сейчаc {main.temp} градусов</p>
-				<Link to={'/cities'}>Back to list</Link>
+				<p>{`${reportPart1} ${name} ${reportPart2}
+				${temp > 0 ? '+' : ''}
+				${temp} ${reportPart3}`}</p>
+				<Link to={'/cities'}>{backToList}</Link>
 				<GoogleMap {...data}/>
 			</div>
 		)
@@ -39,4 +57,6 @@ class LocationDetails extends React.Component {
 	}
 }
 
-export default LocationDetails;
+// export default LocationDetails;
+
+export default translate('LocationDetails')(LocationDetails);
